@@ -197,7 +197,7 @@ rng_init(void *p, size_t len)
     FILE *f = fopen("/dev/urandom", "rb");
     if (!f)
         abort();
-    if (!fread(p, 1, len, f))
+    if (fread(p, 1, len, f) != len)
         abort();
     fclose(f);
 }

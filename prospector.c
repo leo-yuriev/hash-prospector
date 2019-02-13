@@ -823,7 +823,8 @@ main(int argc, char **argv)
     /* Get a unique seed */
     FILE *urandom = fopen("/dev/urandom", "rb");
     if (urandom) {
-        fread(rng, 1, sizeof(rng), urandom);
+        if(fread(rng, 1, sizeof(rng), urandom) != sizeof(rng))
+	    abort();
         fclose(urandom);
     }
 
