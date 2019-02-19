@@ -39,3 +39,9 @@ clean:
 .SUFFIXES: .so .c
 .c.so:
 	$(CC) -shared $(LDFLAGS) -fPIC $(CFLAGS) -o $@ $<
+
+top: @results.txt
+	sort -t . -k 2 $< | head -5
+
+continue: genetic
+	./genetic | tee -a @results.txt
